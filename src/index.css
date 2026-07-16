@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
-:root {
-    --primary: #1a365d;
-    --surface: #f8f9ff;
-    --accent-blue: #3b82f6;
-    --accent-purple: #7c3aed;
-    --text-primary: #111827;
-    --text-muted: #6b7280;
+@theme {
+  --color-background: #f8f9ff;
+  --color-on-error: #ffffff;
+  --color-secondary-fixed: #e8ddff;
+  --color-on-secondary-fixed: #21005e;
+  --color-inverse-on-surface: #eaf1ff;
+  --color-tertiary-container: #4f2e00;
+  --color-tertiary: #321b00;
+  --color-on-primary-fixed: #001b3c;
+  --color-surface-bright: #f8f9ff;
+  --color-tertiary-fixed-dim: #f2bc82;
+  --color-secondary-container: #b299fd;
+  --color-secondary-fixed-dim: #cebdff;
+  --color-surface-container-low: #eff4ff;
+  --color-on-secondary: #ffffff;
+  --color-error: #ba1a1a;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container-high: #dce9ff;
+  --color-primary-container: #1a365d;
+  --color-inverse-primary: #adc7f7;
+  --color-surface-variant: #d3e4fe;
+  --color-on-background: #0b1c30;
+  --color-primary-fixed: #d6e3ff;
+  --color-outline-variant: #c4c6cf;
+  --color-on-secondary-container: #452a89;
+  --color-on-primary-fixed-variant: #2d476f;
+  --color-tertiary-fixed: #ffddba;
+  --color-outline: #74777f;
+  --color-on-surface-variant: #43474e;
+  --color-surface-container-highest: #d3e4fe;
+  --color-error-container: #ffdad6;
+  --color-surface-tint: #455f88;
+  --color-surface-dim: #cbdbf5;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-secondary-fixed-variant: #4e3593;
+  --color-primary: #002045;
+  --color-primary-fixed-dim: #adc7f7;
+  --color-on-tertiary-container: #c6955e;
+  --color-on-primary-container: #86a0cd;
+  --color-on-error-container: #93000a;
+  --color-on-surface: #0b1c30;
+  --color-surface: #f8f9ff;
+  --color-inverse-surface: #213145;
+  --color-surface-container: #e5eeff;
+  --color-secondary: #664eac;
+  --color-on-tertiary-fixed-variant: #633f0f;
+  --color-on-primary: #ffffff;
+  --color-on-tertiary-fixed: #2b1700;
+
+  --radius-DEFAULT: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --spacing-margin-mobile: 16px;
+  --spacing-gutter: 24px;
+  --spacing-stack-sm: 12px;
+  --spacing-stack-lg: 48px;
+  --spacing-stack-md: 24px;
+  --spacing-unit: 8px;
+  --spacing-container-max: 1280px;
+  --spacing-margin-desktop: 40px;
+
+  --font-label-md: Geist, sans-serif;
+  --font-body-lg: Inter, sans-serif;
+  --font-display-lg: Geist, sans-serif;
+  --font-headline-md: Geist, sans-serif;
+  --font-body-sm: Inter, sans-serif;
+  --font-headline-lg: Geist, sans-serif;
+  --font-display-lg-mobile: Geist, sans-serif;
+  --font-body-md: Inter, sans-serif;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@utility text-label-md {
+  font-size: 14px;
+  line-height: 1.0;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
-
-html {
-    scroll-behavior: smooth;
+@utility text-body-lg {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+}
+@utility text-display-lg {
+  font-size: 64px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility text-headline-md {
+  font-size: 24px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+@utility text-body-sm {
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+@utility text-headline-lg {
+  font-size: 32px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+@utility text-display-lg-mobile {
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+@utility text-body-md {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--surface);
-    color: var(--text-primary);
+  background-color: #f8f9ff;
+  color: #0b1c30;
+  overflow-x: hidden;
+}
+
+.editorial-shadow {
+  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04);
+}
+
+.editorial-shadow-hover:hover {
+  box-shadow: 0 12px 24px rgba(26, 54, 93, 0.08);
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  transition: font-variation-settings 0.3s ease;
+}
+
+.group:hover .material-symbols-outlined {
+  font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.kerning-tight {
+  letter-spacing: -0.03em;
 }
