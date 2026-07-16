@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+    --primary: #1a365d;
+    --surface: #f8f9ff;
+    --accent-blue: #3b82f6;
+    --accent-purple: #7c3aed;
+    --text-primary: #111827;
+    --text-muted: #6b7280;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+}
