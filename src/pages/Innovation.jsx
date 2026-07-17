@@ -1,53 +1,10 @@
-import React, { useEffect } from "react";
+import { m } from "framer-motion";
+import { pageVariants } from "../utils/motion";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 
 const Innovation = () => {
-    useEffect(() => {
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("opacity-100", "translate-y-0");
-                    entry.target.classList.remove("opacity-0", "translate-y-8");
-                }
-            });
-        }, observerOptions);
-
-        const targets = document.querySelectorAll("section > div");
-        targets.forEach((el) => {
-            el.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-8");
-            observer.observe(el);
-        });
-
-        // Simple button active scaling micro-interactions
-        const handleMouseDown = (e) => {
-            e.currentTarget.style.transform = "scale(0.98)";
-        };
-        const handleMouseUp = (e) => {
-            e.currentTarget.style.transform = "scale(1)";
-        };
-
-        const interactiveEls = document.querySelectorAll("button, a");
-        interactiveEls.forEach((el) => {
-            el.addEventListener("mousedown", handleMouseDown);
-            el.addEventListener("mouseup", handleMouseUp);
-            el.addEventListener("mouseleave", handleMouseUp);
-        });
-
-        return () => {
-            targets.forEach((el) => {
-                observer.unobserve(el);
-            });
-            interactiveEls.forEach((el) => {
-                el.removeEventListener("mousedown", handleMouseDown);
-                el.removeEventListener("mouseup", handleMouseUp);
-                el.removeEventListener("mouseleave", handleMouseUp);
-            });
-        };
-    }, []);
+    useScrollReveal();
 
     const timelineSteps = [
         {
@@ -77,32 +34,11 @@ const Innovation = () => {
     ];
 
     return (
-        <main className="pt-20">
-            <style>{`
-                .glass-card {
-                    background: rgba(255, 255, 255, 0.7);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(226, 232, 240, 0.8);
-                    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04);
-                    transition: all 0.3s ease;
-                }
-                .glass-card:hover {
-                    box-shadow: 0 12px 24px rgba(26, 54, 93, 0.08);
-                    transform: translateY(-2px);
-                }
-                .editorial-shadow {
-                    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04);
-                }
-                .glass-panel {
-                    background: rgba(255, 255, 255, 0.7);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                }
-            `}</style>
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+            
 
             {/* Hero Section */}
-            <section className="relative min-h-[600px] flex items-center overflow-hidden px-margin-desktop py-12 md:py-16">
+            <section className="relative min-h-[600px] flex items-center overflow-hidden px-4 sm:px-6 md:px-10 py-10 md:py-10 md:py-16">
                 <div className="absolute inset-0 z-0 opacity-10"></div>
                 <div className="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
                     <div className="space-y-6">
@@ -118,21 +54,25 @@ const Innovation = () => {
                             At Nexora Labs, we don't just follow trends—we define them. Our innovation engine transforms speculative concepts into high-fidelity enterprise realities through rigorous R&amp;D.
                         </p>
                         <div className="flex gap-stack-sm pt-2">
-                            <button className="bg-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md shadow-lg transition-transform">
-                                Explore Labs
-                            </button>
-                            <button className="bg-transparent border border-primary text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
-                                Read the Thesis
-                            </button>
+                            <Link to="/solutions" className="inline-block">
+                                <button className="bg-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md shadow-lg transition-transform">
+                                    Explore Labs
+                                </button>
+                            </Link>
+                            <Link to="/case-studies" className="inline-block">
+                                <button className="bg-transparent border border-primary text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                                    Read the Thesis
+                                </button>
+                            </Link>
                         </div>
                     </div>
                     <div className="hidden md:block relative h-[500px] animate-prepare-hero-visual">
                         <div className="absolute inset-0 rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10"></div>
                             <img
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
                                 alt="A futuristic laboratory setting with holographic data projections and minimalist architecture."
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXUqtZxXxwsxkabCO7MrRtsU48HribgJr1bvdHARKFx4G1EHjyACSslw3cRaLgIPr20SLjMexd_FxaO5i_ecEftzydI8CmL2MXm48mvj9tnkqYE0_Mwxp6657e7tAorTze1ktlgAg0vYkXzguKFl_P2j2Ab6jyfuQsXqzuce-WDkUzAfmjc2V8FW5dhy5_44H38s3Ydh24QwwdFBAmQPyU1TntNT8QyLCIlXmyVRH71ua7RCVnhx97"
+                                src="/innovation-lab.webp"
                             />
                         </div>
                         <div className="absolute -bottom-8 -left-8 glass-panel p-6 rounded-xl editorial-shadow border border-outline-variant/30 w-64 animate-bounce-slow">
@@ -145,7 +85,7 @@ const Innovation = () => {
 
             {/* Business Impact Bar */}
             <section className="bg-surface-container-low py-12 border-y border-outline-variant/20 animate-prepare-impact">
-                <div className="max-w-container-max mx-auto px-margin-desktop grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8">
                     <div className="text-center">
                         <p className="text-primary font-headline-lg text-headline-lg">40%</p>
                         <p className="text-on-surface-variant font-label-md text-label-md">Efficiency Gains</p>
@@ -166,8 +106,8 @@ const Innovation = () => {
             </section>
 
             {/* Innovation Journey */}
-            <section className="py-12 md:py-16 px-margin-desktop max-w-container-max mx-auto overflow-hidden animate-prepare-journey">
-                <div className="text-center mb-12">
+            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto overflow-hidden animate-prepare-journey">
+                <div className="text-center mb-10 md:mb-12">
                     <h2 className="font-headline-lg text-headline-lg text-primary mb-4">The Innovation Journey</h2>
                     <div className="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
                 </div>
@@ -202,15 +142,15 @@ const Innovation = () => {
             </section>
 
             {/* Tech Pillars (Bento Grid) */}
-            <section className="py-12 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-pillars">
-                <div className="max-w-container-max mx-auto px-margin-desktop">
-                    <div className="mb-12">
+            <section className="py-10 md:py-10 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-pillars">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10">
+                    <div className="mb-10 md:mb-12">
                         <h2 className="font-headline-lg text-headline-lg text-primary">Innovation Pillars</h2>
                         <p className="text-on-surface-variant mt-2">Core specializations driving our current research cycle.</p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-gutter">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-gutter">
                         {/* Card 1 */}
-                        <div className="md:col-span-2 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-2 glass-card p-8 rounded-xl group">
                             <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
                                 smart_toy
                             </span>
@@ -220,7 +160,7 @@ const Innovation = () => {
                             </p>
                         </div>
                         {/* Card 2 */}
-                        <div className="md:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl group">
                             <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
                                 cloud_sync
                             </span>
@@ -230,7 +170,7 @@ const Innovation = () => {
                             </p>
                         </div>
                         {/* Card 3 */}
-                        <div className="md:col-span-2 lg:col-span-2 bg-primary text-on-primary p-8 rounded-xl border border-primary/20 editorial-shadow transition-all relative overflow-hidden group">
+                        <div className="sm:col-span-2 lg:col-span-2 bg-primary text-on-primary p-8 rounded-xl border border-primary/20 editorial-shadow transition-all relative overflow-hidden group">
                             <div className="absolute right-0 top-0 opacity-10 group-hover:scale-110 transition-transform">
                                 <span className="material-symbols-outlined text-[160px]" style={{ fontVariationSettings: "'FILL' 1" }}>
                                     security
@@ -247,7 +187,7 @@ const Innovation = () => {
                             </div>
                         </div>
                         {/* Card 4 */}
-                        <div className="md:col-span-3 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-3 glass-card p-8 rounded-xl group">
                             <div className="flex flex-col md:flex-row md:items-center gap-8">
                                 <div className="w-full md:w-1/3">
                                     <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
@@ -263,7 +203,7 @@ const Innovation = () => {
                             </div>
                         </div>
                         {/* Card 5 */}
-                        <div className="md:col-span-3 bg-secondary text-on-secondary p-8 rounded-xl border border-secondary/20 editorial-shadow transition-all group">
+                        <div className="sm:col-span-3 bg-secondary text-on-secondary p-8 rounded-xl border border-secondary/20 editorial-shadow transition-all group">
                             <div className="flex flex-col md:flex-row-reverse md:items-center gap-8">
                                 <div className="w-full md:w-1/3">
                                     <span className="material-symbols-outlined text-secondary-fixed text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
@@ -283,17 +223,16 @@ const Innovation = () => {
             </section>
 
             {/* R&D Hub Section */}
-            <section className="py-12 md:py-16 px-margin-desktop max-w-container-max mx-auto animate-prepare-hub">
+            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto animate-prepare-hub">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
                     <div className="order-2 lg:order-1">
                         <div className="grid grid-cols-2 gap-gutter">
                             <div className="space-y-gutter pt-12">
                                 <div className="aspect-square rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
                                     <img
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
                                         alt="A clean, minimalist R&amp;D laboratory workstation featuring sleek monitors showing complex data visualizations."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7u8hohE77IeUgGKibln7Mtpu9Xx8c4JLrZ_FlXOtIu-KyiplckAPyqKCJOuFlSZoaUTPplTdFF6nVrE0vgdVwMfYfedN0eLpGEQHtqVv1mLO68cMTu32ha1goZ74zJCyt87bSPPK5y5ut0tZoRtkQ7aYhMqAGooj40HvqSQG_F-xTjdTci80Og5ED1OVERLJ2MS_J5opDCb1WuPG1M8NefdA93Uux-O3bbFsL7VwzUVsKT59RfR9n"
-                                        loading="lazy"
+                                        src="/innovation-workstation.webp"
                                     />
                                 </div>
                                 <div className="glass-card p-8 rounded-2xl">
@@ -308,10 +247,9 @@ const Innovation = () => {
                                 </div>
                                 <div className="aspect-square rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
                                     <img
-                                        className="w-full h-full object-cover"
+                                        className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
                                         alt="Close-up of a high-tech processor or quantum chip under controlled blue and purple studio lighting."
-                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0_FCflxi6xx53AwQmTV0be0vD0SORsLlzFIT8BhstDWC_CDp4pK_jwUz3TS71LzliXUeXtIBmBGH4XKdnspQdop1UuUqobvY2oePkZVrCH5Thh_OhGlgvIpj2fswnLN1-3BRcf4g1-t-ogHxcV3dk4iW4tWIOUuXiMRNOySWKYPPWQNGody10T2n6MJqD9Kn3ynq2dm06AlLHic7tr2UY8GaV20yz1cA0hdbHG4Ewsu6iWYMdDemZ"
-                                        loading="lazy"
+                                        src="/innovation-chip.webp"
                                     />
                                 </div>
                             </div>
@@ -337,18 +275,20 @@ const Innovation = () => {
                             </li>
                         </ul>
                         <div className="pt-4">
-                            <button className="bg-transparent border-b-2 border-secondary text-secondary font-label-md py-1 px-1 hover:gap-4 flex items-center gap-2 transition-all group">
-                                Explore Partnerships <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
-                            </button>
+                            <Link to="/contact" className="inline-block">
+                                <button className="bg-transparent border-b-2 border-secondary text-secondary font-label-md py-1 px-1 hover:gap-4 flex items-center gap-2 transition-all group cursor-pointer">
+                                    Explore Partnerships <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Process Section */}
-            <section className="py-12 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-process">
-                <div className="max-w-container-max mx-auto px-margin-desktop text-center">
-                    <h2 className="font-headline-lg text-headline-lg text-primary mb-12">How We Innovate</h2>
+            <section className="py-10 md:py-10 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-process">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 text-center">
+                    <h2 className="font-headline-lg text-headline-lg text-primary mb-10 md:mb-12">How We Innovate</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="space-y-4 px-6">
                             <div className="text-secondary font-display-lg opacity-20 leading-none">01</div>
@@ -370,7 +310,7 @@ const Innovation = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="py-12 md:py-16 px-margin-desktop animate-prepare-cta">
+            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 animate-prepare-cta">
                 <div className="max-w-container-max mx-auto relative rounded-3xl overflow-hidden bg-primary p-12 md:p-24 text-center">
                     <div className="absolute inset-0 opacity-20"></div>
                     <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
@@ -381,17 +321,21 @@ const Innovation = () => {
                             Accelerate your organization's digital evolution with Nexora Labs' innovation pipeline. Let's build what's next, together.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                            <button className="bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:brightness-110 shadow-xl transition-all">
-                                Start Collaboration
-                            </button>
-                            <button className="bg-transparent border border-on-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-all">
-                                Schedule a Workshop
-                            </button>
+                            <Link to="/contact">
+                                <button className="bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:brightness-110 shadow-xl transition-all w-full sm:w-auto">
+                                    Start Collaboration
+                                </button>
+                            </Link>
+                            <Link to="/contact">
+                                <button className="bg-transparent border border-on-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-all w-full sm:w-auto">
+                                    Schedule a Workshop
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </section>
-        </main>
+        </m.main>
     );
 };
 

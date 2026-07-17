@@ -146,3 +146,126 @@ body {
 .kerning-tight {
   letter-spacing: -0.03em;
 }
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  box-shadow: 0 12px 30px rgba(26, 54, 93, 0.08);
+  transform: translateY(-4px);
+  border-color: rgba(102, 78, 172, 0.4);
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.animate-bounce-slow {
+  animation: bounce 6s infinite ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.input-focus-effect:focus {
+  outline: none;
+  border-color: #664eac;
+  box-shadow: 0 0 0 4px rgba(102, 78, 172, 0.15);
+}
+
+/* Interactive cursor pointers for desktop */
+@media (min-width: 768px) {
+  button, a, select, summary, [role="button"], input[type="submit"] {
+    cursor: pointer;
+  }
+}
+
+/* Nav underline animated effect */
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #664eac;
+  transform-origin: bottom right;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-item:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.nav-link-active::after {
+  transform: scaleX(1) !important;
+  background-color: #664eac;
+}
+
+/* Premium Image Hover scaling */
+.premium-img-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.premium-img-hover:hover {
+  transform: scale(1.03);
+  filter: brightness(1.03);
+  box-shadow: 0 16px 36px rgba(26, 54, 93, 0.12);
+}
+
+/* Hero image very slow float and soft glow pulse */
+@keyframes hero-float-glow {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotate(1deg);
+    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04), 0 0 10px rgba(102, 78, 172, 0.05);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.008) rotate(1deg);
+    box-shadow: 0 8px 24px rgba(26, 54, 93, 0.08), 0 0 25px rgba(102, 78, 172, 0.2);
+  }
+}
+.animate-hero-float-glow {
+  animation: hero-float-glow 6s ease-in-out infinite;
+}
+
+/* Footer links slide on hover */
+.footer-link-slide {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+.footer-link-slide:hover {
+  transform: translateX(4px);
+  color: #8B5CF6 !important;
+}
+
+/* Footer social icon hover scale and rotate */
+.footer-social-icon {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.footer-social-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(139, 92, 246, 0.25);
+  color: #ffffff !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}

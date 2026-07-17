@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import { m } from "framer-motion";
+import { pageVariants } from "../utils/motion";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import { Link } from "react-router-dom";
 
 const caseStudiesData = [
@@ -8,7 +11,7 @@ const caseStudiesData = [
         filterCategory: "Healthcare",
         title: "MediSync AI Diagnostics",
         description: "Implementing real-time data orchestration for personalized patient treatment plans across 50+ clinics.",
-        imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuCcqWwyxRu2WNVNtILkH7cgAq8m-RiYcM3_ZKhRpAqiI7-D5bXoM9Q9SfURFMnEUCXzjinx1oxwPDdIPlT2OFRUuPYD3A4bXBESSdc9A185HqWcHNdHFemCXC2L4hvRcrlkujFFI9bZnuRAmb2TYuVEI9hB00lMQaBhzf-3Lqmj5NLRgWihVj71zpgvKeNLwi8y4abvSDbfMdbv8vAHCwkT9yOJ-RgxEswTqc-k0v0M8U-qRulcBgDi",
+        imageSrc: "/case-healthcare.webp",
         imageAlt: "A modern medical diagnostic laboratory with advanced robotic arms.",
         gridClass: "md:col-span-2",
         layoutClass: "flex-col md:flex-row",
@@ -22,7 +25,7 @@ const caseStudiesData = [
         filterCategory: "Retail",
         title: "NextGen Storefront",
         description: "Omnichannel inventory sync for a luxury global fashion house.",
-        imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuBD7dY1XMEJGihpam44RA2gpWUZ0Age9lnM1cf2pxb5nUf1w5mw5A3EwFrOT0IgeZ4SbAoARdLx-mrnzVnxMW6L8qRcHgmH4OZ5ka4i9jQwpAE49UtIoxjXLFA_6Jb4nmjCQxrwntW8-PYq3ZF6k1pdWgUbXTC_jnw6rxoGvLPun8sfrRO2FYOyBBBxek3rojDcbz1qcB9L_cP2oBjNaseQbVzBCDib9M7ahrRW-ZdP9--i3woElNrI",
+        imageSrc: "/case-study-visual.png",
         imageAlt: "An upscale, minimalist retail space with architectural lighting.",
         gridClass: "col-span-1",
         layoutClass: "flex-col",
@@ -36,7 +39,7 @@ const caseStudiesData = [
         filterCategory: "Finance",
         title: "Vanguard Protocol",
         description: "End-to-end encryption upgrade for a national banking consortium.",
-        imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuDSj8vGZiCDvr22whlI-uFl4PvCKBdZFLSVUOhTPJQq2DG2QkHzHaH0t9rjjp-GhutSzfolTvo-C8HFgGQA3l4cgjujmVaKW_IofJTo_3sX2G6KWJinhDAdOXoGzimPIyXl3vhs8cowT8ZuU0kMCfcvVMsftTk2ZJ8bAB9cRYDNdqk8Li5m3X0J2S7Z9_3eDdLUwZENAWkOm5XhVhvu27VYKw7OzL3wO09ALCMrrefhFv3cVxfWyufA",
+        imageSrc: "/case-security.webp",
         imageAlt: "A close-up of a digital interface showing complex cryptographic strings.",
         gridClass: "col-span-1",
         layoutClass: "flex-col",
@@ -49,7 +52,7 @@ const caseStudiesData = [
         filterCategory: "Logistics",
         title: "Global Route Optimizer",
         description: "Reducing carbon footprint through ML-driven fleet orchestration and real-time traffic analysis.",
-        imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuCo1m4ZIA4IDisegj8gZOrZOZx14eY7Ahtw8HqOgP6mKTAJoWsBcbvw6GpiVULX_3sHIfZOIVySLJns3J8cIfbTiHTyIgiGNlD2f-X-oYylAFXOduiZXB_1rGL3vKvF2vetrWuqlRjmZv2sDsnsSMi46-DQQ7CaOuY6cuxXZ-OwIngI1aHO9QLtCZGhHEo2wwwMJqvzY_8q7bz1OXJbgLfH3rIaBqa1IB5-ZWsJUmbf8gq-GfYX9g7s",
+        imageSrc: "/solutions-cloud.webp",
         imageAlt: "A large-scale logistics hub at dusk with automated vehicles.",
         gridClass: "md:col-span-2",
         layoutClass: "flex-col md:flex-row-reverse",
@@ -61,77 +64,18 @@ const caseStudiesData = [
 
 const CaseStudies = () => {
     const [selectedFilter, setSelectedFilter] = useState("All");
-
-    useEffect(() => {
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("opacity-100", "translate-y-0");
-                    entry.target.classList.remove("opacity-0", "translate-y-8");
-                }
-            });
-        }, observerOptions);
-
-        const targets = document.querySelectorAll("section > div");
-        targets.forEach((el) => {
-            el.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-8");
-            observer.observe(el);
-        });
-
-        // Haptic scaling micro-interactions
-        const handleMouseDown = (e) => {
-            e.currentTarget.style.transform = "scale(0.98)";
-        };
-        const handleMouseUp = (e) => {
-            e.currentTarget.style.transform = "scale(1)";
-        };
-
-        const interactiveEls = document.querySelectorAll("button, a");
-        interactiveEls.forEach((el) => {
-            el.addEventListener("mousedown", handleMouseDown);
-            el.addEventListener("mouseup", handleMouseUp);
-            el.addEventListener("mouseleave", handleMouseUp);
-        });
-
-        return () => {
-            targets.forEach((el) => {
-                observer.unobserve(el);
-            });
-            interactiveEls.forEach((el) => {
-                el.removeEventListener("mousedown", handleMouseDown);
-                el.removeEventListener("mouseup", handleMouseUp);
-                el.removeEventListener("mouseleave", handleMouseUp);
-            });
-        };
-    }, []);
+    useScrollReveal();
 
     const filteredCaseStudies = selectedFilter === "All"
         ? caseStudiesData
         : caseStudiesData.filter(item => item.filterCategory === selectedFilter);
 
     return (
-        <main className="pt-20">
-            <style>{`
-                .glass-card {
-                    background: rgba(255, 255, 255, 0.7);
-                    backdrop-filter: blur(12px);
-                    -webkit-backdrop-filter: blur(12px);
-                    border: 1px solid rgba(226, 232, 240, 0.8);
-                    box-shadow: 0 4px 12px rgba(26, 54, 93, 0.04);
-                    transition: all 0.3s ease;
-                }
-                .glass-card:hover {
-                    box-shadow: 0 12px 24px rgba(26, 54, 93, 0.08);
-                    transform: translateY(-2px);
-                }
-            `}</style>
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+            
 
             {/* Success Stories Header */}
-            <section className="py-12 md:py-16 px-margin-desktop max-w-container-max mx-auto text-center md:text-left animate-prepare-header">
+            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto text-center md:text-left animate-prepare-header">
                 <div className="max-w-3xl">
                     <span className="inline-block bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md mb-4 uppercase tracking-widest">
                         Global Success
@@ -146,17 +90,17 @@ const CaseStudies = () => {
             </section>
 
             {/* Featured Case Study */}
-            <section className="relative min-h-[500px] flex items-center overflow-hidden mb-12 md:mb-16 animate-prepare-featured">
+            <section className="relative min-h-[500px] flex items-center overflow-hidden mb-8 md:mb-12 md:mb-10 md:mb-16 animate-prepare-featured">
                 <div className="absolute inset-0 z-0">
                     <div
                         className="w-full h-full bg-cover bg-center"
                         style={{
-                            backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBmR9jy2EglChHPDSsf-jRwtADQsBag41uC6hyR4iJi-bKju1C67T-ItOzoXfd8Zo2LHikDpebwFOh9faeB8BI2EG4Pe46EzIg1a7rk0oNeE81_vN6p9ZhByik4eaPKCP1k_T-qzh6bezbICNwyYH2k1_EtEUyhcdez7vRwiAHjPy604sC_WDGERk2VrjAiNhjUs6w87V_uovPDNEA_YW16azTinQZHiZuD10wsCAiq3sRvqp3XsA77')"
+                            backgroundImage: "url('/case-fintech.webp')"
                         }}
                     ></div>
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"></div>
                 </div>
-                <div className="relative z-10 px-margin-desktop max-w-container-max mx-auto w-full py-12 md:py-16">
+                <div className="relative z-10 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto w-full py-10 md:py-10 md:py-16">
                     <div className="max-w-2xl text-white space-y-6">
                         <div className="flex items-center gap-2 text-secondary-fixed">
                             <span className="material-symbols-outlined">star</span>
@@ -178,16 +122,18 @@ const CaseStudies = () => {
                                 <div className="font-label-md text-label-md opacity-70">Assets Managed</div>
                             </div>
                         </div>
-                        <button className="bg-white text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors shadow-lg">
-                            View Full Case Study
-                        </button>
+                        <Link to="/contact">
+                            <button className="bg-white text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors shadow-lg cursor-pointer">
+                                View Full Case Study
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
 
             {/* Case Study Grid (Masonry-like Bento) */}
-            <section className="px-margin-desktop max-w-container-max mx-auto py-12 md:py-16 border-t border-outline-variant/20 animate-prepare-grid">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <section className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto py-10 md:py-10 md:py-16 border-t border-outline-variant/20 animate-prepare-grid">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-4">
                     <div>
                         <h2 className="font-headline-lg text-headline-lg text-primary">Industry Diversification</h2>
                         <p className="font-body-md text-body-md text-on-surface-variant">
@@ -215,7 +161,7 @@ const CaseStudies = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-gutter">
                     {filteredCaseStudies.map((card) => (
                         <div
                             key={card.id}
@@ -234,13 +180,13 @@ const CaseStudies = () => {
                             {/* Card Content Container */}
                             <div className={`p-6 ${card.gridClass.includes("col-span-2") ? "md:w-1/2" : "w-full"} flex flex-col justify-between`}>
                                 <div>
-                                    <span className="text-secondary font-label-md text-label-md mb-2 block">
+                                    <span className="text-secondary font-label-md text-xs sm:text-label-md mb-2 block">
                                         {card.category}
                                     </span>
-                                    <h3 className="font-headline-md text-headline-md text-primary mb-3">
+                                    <h3 className="font-headline-md text-lg md:text-lg sm:text-headline-md text-primary mb-3">
                                         {card.title}
                                     </h3>
-                                    <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                                    <p className="font-body-sm text-xs sm:text-body-sm text-on-surface-variant mb-6 leading-relaxed">
                                         {card.description}
                                     </p>
                                 </div>
@@ -249,10 +195,10 @@ const CaseStudies = () => {
                                 {card.hasArrow && (
                                     <div className="border-t border-outline-variant/30 pt-4 flex items-center justify-between">
                                         <div>
-                                            <span className="font-label-md text-label-md text-on-surface-variant block">
+                                            <span className="font-label-md text-label-md text-xs sm:text-label-md text-on-surface-variant block">
                                                 {card.resultLabel}
                                             </span>
-                                            <span className="font-headline-md text-headline-md text-primary">
+                                            <span className="font-headline-md text-lg md:text-headline-md text-primary">
                                                 {card.resultValue}
                                             </span>
                                         </div>
@@ -264,10 +210,10 @@ const CaseStudies = () => {
 
                                 {card.isStatBox && (
                                     <div className="bg-surface-container-low p-4 rounded-lg">
-                                        <span className="font-label-md text-label-md text-on-surface-variant block">
+                                        <span className="font-label-md text-label-md text-xs sm:text-label-md text-on-surface-variant block">
                                             {card.resultLabel}
                                         </span>
-                                        <span className="font-headline-md text-headline-md text-primary">
+                                        <span className="font-headline-md text-lg md:text-headline-md text-primary">
                                             {card.resultValue}
                                         </span>
                                     </div>
@@ -290,12 +236,22 @@ const CaseStudies = () => {
                                             <span className="font-label-md text-label-md text-on-tertiary-fixed-variant block">
                                                 {card.tertiaryLabel}
                                             </span>
-                                            <span className="font-headline-md text-headline-md text-on-tertiary-fixed font-bold">
+                                            <span className="font-headline-md text-lg md:text-headline-md text-on-tertiary-fixed font-bold">
                                                 {card.tertiaryValue}
                                             </span>
                                         </div>
                                     </div>
                                 )}
+
+                                <div className="mt-4 pt-4 border-t border-outline-variant/30 flex gap-4 text-xs font-label-md">
+                                    <Link to={card.id === "medisync" ? "/solutions#artificial-intelligence" : card.id === "nextgen" ? "/solutions#software-development" : card.id === "vanguard" ? "/solutions#cybersecurity" : "/solutions#cloud-engineering"} className="text-secondary hover:text-primary transition-colors font-bold">
+                                        Related Solution
+                                    </Link>
+                                    <span className="text-outline-variant">|</span>
+                                    <Link to="/contact" className="text-on-surface-variant hover:text-primary transition-colors font-bold">
+                                        Discuss Similar Project
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -303,12 +259,12 @@ const CaseStudies = () => {
             </section>
 
             {/* Global Impact Map */}
-            <section className="py-12 md:py-16 bg-primary-container text-white overflow-hidden border-t border-outline-variant/20 animate-prepare-map">
-                <div className="px-margin-desktop max-w-container-max mx-auto">
+            <section className="py-10 md:py-10 md:py-16 bg-primary-container text-white overflow-hidden border-t border-outline-variant/20 animate-prepare-map">
+                <div className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
                         <div className="relative">
                             <h2 className="font-headline-lg text-headline-lg mb-6">Our global footprint is expanding.</h2>
-                            <p className="font-body-lg text-body-lg text-on-primary-container mb-12">
+                            <p className="font-body-lg text-body-lg text-on-primary-container mb-8 md:mb-12">
                                 Nexora Labs operates across 4 continents, delivering locally optimized technology with global-scale reliability.
                             </p>
                             <div className="space-y-6">
@@ -317,8 +273,8 @@ const CaseStudies = () => {
                                         <span className="material-symbols-outlined">public</span>
                                     </div>
                                     <div>
-                                        <h4 className="font-headline-md text-headline-md">24+ Countries</h4>
-                                        <p className="font-body-sm text-body-sm opacity-70">
+                                        <h4 className="font-headline-md text-lg md:text-headline-md">24+ Countries</h4>
+                                        <p className="font-body-sm text-xs sm:text-body-sm opacity-70">
                                             Active deployments in North America, Europe, Asia, and Oceania.
                                         </p>
                                     </div>
@@ -328,8 +284,8 @@ const CaseStudies = () => {
                                         <span className="material-symbols-outlined">partner_exchange</span>
                                     </div>
                                     <div>
-                                        <h4 className="font-headline-md text-headline-md">Fortune 500 Network</h4>
-                                        <p className="font-body-sm text-body-sm opacity-70">
+                                        <h4 className="font-headline-md text-lg md:text-headline-md">Fortune 500 Network</h4>
+                                        <p className="font-body-sm text-xs sm:text-body-sm opacity-70">
                                             Over 60% of our clients are global enterprise market leaders.
                                         </p>
                                     </div>
@@ -378,7 +334,7 @@ const CaseStudies = () => {
                                     <div
                                         className="w-full h-full bg-contain bg-no-repeat bg-center opacity-40"
                                         style={{
-                                            backgroundImage: "url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')"
+                                            backgroundImage: "url('/contact-map.webp')"
                                         }}
                                     ></div>
                                 </div>
@@ -387,7 +343,7 @@ const CaseStudies = () => {
                     </div>
                 </div>
             </section>
-        </main>
+        </m.main>
     );
 };
 
