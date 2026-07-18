@@ -34,12 +34,13 @@ const Innovation = () => {
     ];
 
     return (
-        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20 bg-background">
             
 
             {/* Hero Section */}
-            <section className="relative min-h-[600px] flex items-center overflow-hidden px-4 sm:px-6 md:px-10 py-10 md:py-10 md:py-16">
-                <div className="absolute inset-0 z-0 opacity-10"></div>
+            <section className="relative min-h-150 flex items-center overflow-hidden px-4 sm:px-6 md:px-10 py-12 md:py-20 bg-dot-pattern">
+                {/* Soft radial glow behind hero */}
+                <div className="absolute inset-0 radial-glow-hero -z-10 pointer-events-none opacity-80"></div>
                 <div className="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
                     <div className="space-y-6">
                         <div className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high rounded-full text-primary font-label-md text-sm uppercase tracking-widest animate-prepare-badge">
@@ -55,27 +56,27 @@ const Innovation = () => {
                         </p>
                         <div className="flex gap-stack-sm pt-2">
                             <Link to="/solutions" className="inline-block">
-                                <button className="bg-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md shadow-lg transition-transform">
+                                <button className="bg-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md transition-all duration-300 hover:shadow-lg hover:-translate-y-px cursor-pointer">
                                     Explore Labs
                                 </button>
                             </Link>
                             <Link to="/case-studies" className="inline-block">
-                                <button className="bg-transparent border border-primary text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                                <button className="bg-transparent border border-primary text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-all duration-300 hover:-translate-y-px cursor-pointer">
                                     Read the Thesis
                                 </button>
                             </Link>
                         </div>
                     </div>
-                    <div className="hidden md:block relative h-[500px] animate-prepare-hero-visual">
-                        <div className="absolute inset-0 rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
-                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent z-10"></div>
+                    <div className="hidden md:block relative h-125 animate-prepare-hero-visual">
+                        <div className="w-full h-full premium-image-wrapper premium-card-hover">
+                            <div className="absolute inset-0 bg-linear-to-tr from-primary/20 to-transparent z-10"></div>
                             <img
-                                className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
+                                className="w-full h-full object-cover" loading="lazy" decoding="async"
                                 alt="A futuristic laboratory setting with holographic data projections and minimalist architecture."
                                 src="/innovation-lab.webp"
                             />
                         </div>
-                        <div className="absolute -bottom-8 -left-8 glass-panel p-6 rounded-xl editorial-shadow border border-outline-variant/30 w-64 animate-bounce-slow">
+                        <div className="absolute -bottom-8 -left-8 glass-panel p-6 rounded-xl border border-black/4 shadow-lg w-64 animate-bounce-slow">
                             <div className="text-secondary font-headline-md text-headline-md mb-1">98%</div>
                             <div className="text-on-surface-variant font-label-md text-sm">R&amp;D Translation Rate</div>
                         </div>
@@ -83,31 +84,35 @@ const Innovation = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Business Impact Bar */}
-            <section className="bg-surface-container-low py-12 border-y border-outline-variant/20 animate-prepare-impact">
-                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <section className="bg-[#fcfcfd] py-12 border-b border-black/2 animate-prepare-impact bg-grid-pattern relative">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
                     <div className="text-center">
-                        <p className="text-primary font-headline-lg text-headline-lg">40%</p>
+                        <p className="text-primary font-headline-lg text-headline-lg font-bold">40%</p>
                         <p className="text-on-surface-variant font-label-md text-label-md">Efficiency Gains</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-secondary font-headline-lg text-headline-lg">&lt;1ms</p>
+                        <p className="text-secondary font-headline-lg text-headline-lg font-bold">&lt;1ms</p>
                         <p className="text-on-surface-variant font-label-md text-label-md">Network Latency</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-primary font-headline-lg text-headline-lg">24/7</p>
+                        <p className="text-primary font-headline-lg text-headline-lg font-bold">24/7</p>
                         <p className="text-on-surface-variant font-label-md text-label-md">AI Governance</p>
                     </div>
                     <div className="text-center">
-                        <p className="text-secondary font-headline-lg text-headline-lg">12+</p>
+                        <p className="text-secondary font-headline-lg text-headline-lg font-bold">12+</p>
                         <p className="text-on-surface-variant font-label-md text-label-md">Global Patents</p>
                     </div>
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Innovation Journey */}
-            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto overflow-hidden animate-prepare-journey">
-                <div className="text-center mb-10 md:mb-12">
+            <section className="py-16 md:py-24 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto overflow-hidden bg-background animate-prepare-journey">
+                <div className="text-center mb-16 md:mb-20">
                     <h2 className="font-headline-lg text-headline-lg text-primary mb-4">The Innovation Journey</h2>
                     <div className="h-1 w-20 bg-secondary mx-auto rounded-full"></div>
                 </div>
@@ -141,16 +146,18 @@ const Innovation = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Tech Pillars (Bento Grid) */}
-            <section className="py-10 md:py-10 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-pillars">
-                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10">
-                    <div className="mb-10 md:mb-12">
+            <section className="py-16 md:py-24 bg-[#fcfcfd] border-b border-black/2 animate-prepare-pillars relative overflow-hidden bg-grid-pattern">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 relative z-10">
+                    <div className="mb-12 md:mb-16">
                         <h2 className="font-headline-lg text-headline-lg text-primary">Innovation Pillars</h2>
                         <p className="text-on-surface-variant mt-2">Core specializations driving our current research cycle.</p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6 md:gap-gutter">
                         {/* Card 1 */}
-                        <div className="sm:col-span-2 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-2 glass-card p-8 rounded-xl group border border-black/4">
                             <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
                                 smart_toy
                             </span>
@@ -160,7 +167,7 @@ const Innovation = () => {
                             </p>
                         </div>
                         {/* Card 2 */}
-                        <div className="sm:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-2 lg:col-span-2 glass-card p-8 rounded-xl group border border-black/4">
                             <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
                                 cloud_sync
                             </span>
@@ -170,8 +177,8 @@ const Innovation = () => {
                             </p>
                         </div>
                         {/* Card 3 */}
-                        <div className="sm:col-span-2 lg:col-span-2 bg-primary text-on-primary p-8 rounded-xl border border-primary/20 editorial-shadow transition-all relative overflow-hidden group">
-                            <div className="absolute right-0 top-0 opacity-10 group-hover:scale-110 transition-transform">
+                        <div className="sm:col-span-2 lg:col-span-2 bg-primary text-on-primary p-8 rounded-xl border border-primary/20 transition-all duration-300 hover:-translate-y-0.75 hover:shadow-lg relative overflow-hidden group text-left">
+                            <div className="absolute right-0 top-0 opacity-10 group-hover:scale-110 transition-transform duration-500">
                                 <span className="material-symbols-outlined text-[160px]" style={{ fontVariationSettings: "'FILL' 1" }}>
                                     security
                                 </span>
@@ -180,14 +187,14 @@ const Innovation = () => {
                                 <span className="material-symbols-outlined text-secondary-fixed text-4xl mb-4 inline-block">
                                     encrypted
                                 </span>
-                                <h3 className="font-headline-md text-headline-md mb-3">Cyber Research</h3>
+                                <h3 className="font-headline-md text-headline-md mb-3 text-white">Cyber Research</h3>
                                 <p className="text-primary-fixed-dim font-body-md">
                                     Quantum-resistant encryption and zero-trust verification models for a decentralized future.
                                 </p>
                             </div>
                         </div>
                         {/* Card 4 */}
-                        <div className="sm:col-span-3 glass-card p-8 rounded-xl group">
+                        <div className="sm:col-span-3 glass-card p-8 rounded-xl group border border-black/4">
                             <div className="flex flex-col md:flex-row md:items-center gap-8">
                                 <div className="w-full md:w-1/3">
                                     <span className="material-symbols-outlined text-secondary text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
@@ -203,13 +210,13 @@ const Innovation = () => {
                             </div>
                         </div>
                         {/* Card 5 */}
-                        <div className="sm:col-span-3 bg-secondary text-on-secondary p-8 rounded-xl border border-secondary/20 editorial-shadow transition-all group">
+                        <div className="sm:col-span-3 bg-secondary text-on-secondary p-8 rounded-xl border border-secondary/20 transition-all duration-300 hover:-translate-y-0.75 hover:shadow-lg group text-left">
                             <div className="flex flex-col md:flex-row-reverse md:items-center gap-8">
                                 <div className="w-full md:w-1/3">
                                     <span className="material-symbols-outlined text-secondary-fixed text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">
                                         psychology
                                     </span>
-                                    <h3 className="font-headline-md text-headline-md">Future Tech</h3>
+                                    <h3 className="font-headline-md text-headline-md text-white">Future Tech</h3>
                                 </div>
                                 <div className="w-full md:w-2/3">
                                     <p className="text-on-secondary/80 font-body-md">
@@ -222,32 +229,34 @@ const Innovation = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* R&D Hub Section */}
-            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto animate-prepare-hub">
+            <section className="py-16 md:py-24 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto animate-prepare-hub bg-background">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
                     <div className="order-2 lg:order-1">
                         <div className="grid grid-cols-2 gap-gutter">
                             <div className="space-y-gutter pt-12">
-                                <div className="aspect-square rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
+                                <div className="aspect-square premium-image-wrapper premium-card-hover">
                                     <img
-                                        className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
+                                        className="w-full h-full object-cover" loading="lazy" decoding="async"
                                         alt="A clean, minimalist R&amp;D laboratory workstation featuring sleek monitors showing complex data visualizations."
                                         src="/innovation-workstation.webp"
                                     />
                                 </div>
-                                <div className="glass-card p-8 rounded-2xl">
+                                <div className="glass-card p-8 rounded-xl border border-black/4">
                                     <h4 className="font-headline-md text-primary mb-2">Neural Lab</h4>
                                     <p className="text-sm text-on-surface-variant">Focusing on ethical AI and large-scale language model alignment.</p>
                                 </div>
                             </div>
                             <div className="space-y-gutter">
-                                <div className="bg-primary p-8 rounded-2xl border border-primary/20 text-on-primary editorial-shadow">
-                                    <h4 className="font-headline-md mb-2">Edge Lab</h4>
+                                <div className="bg-primary p-8 rounded-xl border border-primary/20 text-on-primary transition-all duration-300 hover:-translate-y-px hover:shadow-md">
+                                    <h4 className="font-headline-md mb-2 text-white">Edge Lab</h4>
                                     <p className="text-sm text-primary-fixed-dim">Developing autonomous sensor networks for extreme environments.</p>
                                 </div>
-                                <div className="aspect-square rounded-2xl overflow-hidden editorial-shadow border border-outline-variant/30">
+                                <div className="aspect-square premium-image-wrapper premium-card-hover">
                                     <img
-                                        className="w-full h-full object-cover premium-img-hover" loading="lazy" decoding="async"
+                                        className="w-full h-full object-cover" loading="lazy" decoding="async"
                                         alt="Close-up of a high-tech processor or quantum chip under controlled blue and purple studio lighting."
                                         src="/innovation-chip.webp"
                                     />
@@ -276,8 +285,8 @@ const Innovation = () => {
                         </ul>
                         <div className="pt-4">
                             <Link to="/contact" className="inline-block">
-                                <button className="bg-transparent border-b-2 border-secondary text-secondary font-label-md py-1 px-1 hover:gap-4 flex items-center gap-2 transition-all group cursor-pointer">
-                                    Explore Partnerships <span className="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                                <button className="bg-transparent border-b-2 border-secondary text-secondary font-label-md py-1 px-1 flex items-center gap-2 transition-all group cursor-pointer">
+                                    Explore Partnerships <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </button>
                             </Link>
                         </div>
@@ -285,9 +294,11 @@ const Innovation = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Process Section */}
-            <section className="py-10 md:py-10 md:py-16 bg-surface-container-lowest border-t border-outline-variant/20 animate-prepare-process">
-                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 text-center">
+            <section className="py-16 md:py-24 bg-[#fcfcfd] border-b border-black/2 animate-prepare-process relative overflow-hidden bg-grid-pattern">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 text-center relative z-10">
                     <h2 className="font-headline-lg text-headline-lg text-primary mb-10 md:mb-12">How We Innovate</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                         <div className="space-y-4 px-6">
@@ -309,10 +320,14 @@ const Innovation = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* CTA Section */}
-            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 animate-prepare-cta">
-                <div className="max-w-container-max mx-auto relative rounded-3xl overflow-hidden bg-primary p-12 md:p-24 text-center">
-                    <div className="absolute inset-0 opacity-20"></div>
+            <section className="py-16 md:py-24 px-4 sm:px-6 md:px-10 animate-prepare-cta bg-background">
+                <div className="max-w-container-max mx-auto relative rounded-3xl overflow-hidden bg-linear-to-br from-primary via-[#001733] to-[#1a0033] p-12 md:p-24 text-center border border-black/4">
+                    {/* Animated atmospheric circle */}
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                    <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-fixed/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
                     <div className="relative z-10 space-y-6 max-w-2xl mx-auto">
                         <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-primary">
                             Partner with the <span className="text-secondary-fixed">Future</span>
@@ -322,12 +337,12 @@ const Innovation = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                             <Link to="/contact">
-                                <button className="bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:brightness-110 shadow-xl transition-all w-full sm:w-auto">
+                                <button className="bg-secondary text-on-secondary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:brightness-110 transition-all hover:-translate-y-px shadow-xl w-full sm:w-auto cursor-pointer">
                                     Start Collaboration
                                 </button>
                             </Link>
                             <Link to="/contact">
-                                <button className="bg-transparent border border-on-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-all w-full sm:w-auto">
+                                <button className="bg-transparent border border-on-primary text-on-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-all hover:-translate-y-px w-full sm:w-auto cursor-pointer">
                                     Schedule a Workshop
                                 </button>
                             </Link>

@@ -71,13 +71,15 @@ const CaseStudies = () => {
         : caseStudiesData.filter(item => item.filterCategory === selectedFilter);
 
     return (
-        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20 bg-background">
             
 
             {/* Success Stories Header */}
-            <section className="py-10 md:py-10 md:py-16 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto text-center md:text-left animate-prepare-header">
-                <div className="max-w-3xl">
-                    <span className="inline-block bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md mb-4 uppercase tracking-widest">
+            <section className="relative py-12 md:py-20 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto text-center md:text-left animate-prepare-header bg-dot-pattern">
+                {/* Soft radial glow behind header */}
+                <div className="absolute inset-0 radial-glow-hero -z-10 pointer-events-none opacity-80"></div>
+                <div className="max-w-3xl relative z-10">
+                    <span className="inline-block bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md mb-4 uppercase tracking-widest text-xs">
                         Global Success
                     </span>
                     <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6">
@@ -89,22 +91,24 @@ const CaseStudies = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Featured Case Study */}
-            <section className="relative min-h-[500px] flex items-center overflow-hidden mb-8 md:mb-12 md:mb-10 md:mb-16 animate-prepare-featured">
-                <div className="absolute inset-0 z-0">
+            <section className="relative min-h-125 flex items-center overflow-hidden animate-prepare-featured bg-background py-10 md:py-16">
+                <div className="absolute inset-0 z-0 mx-4 sm:mx-6 md:mx-10 rounded-2xl overflow-hidden border border-black/5 shadow-lg">
                     <div
                         className="w-full h-full bg-cover bg-center"
                         style={{
                             backgroundImage: "url('/case-fintech.webp')"
                         }}
                     ></div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-primary/95 via-primary/50 to-transparent"></div>
                 </div>
-                <div className="relative z-10 px-4 sm:px-6 md:px-10 max-w-container-max mx-auto w-full py-10 md:py-10 md:py-16">
+                <div className="relative z-10 px-8 sm:px-12 md:px-16 max-w-container-max mx-auto w-full py-10 md:py-16">
                     <div className="max-w-2xl text-white space-y-6">
                         <div className="flex items-center gap-2 text-secondary-fixed">
                             <span className="material-symbols-outlined">star</span>
-                            <span className="font-label-md text-label-md uppercase tracking-wider">Featured Story</span>
+                            <span className="font-label-md text-label-md uppercase tracking-wider text-xs">Featured Story</span>
                         </div>
                         <h2 className="font-headline-lg text-headline-lg">
                             Lumina Financial: Reimagining Global Asset Management
@@ -115,15 +119,15 @@ const CaseStudies = () => {
                         <div className="grid grid-cols-2 gap-8 pt-2">
                             <div>
                                 <div className="text-display-lg-mobile font-display-lg text-secondary-fixed">40%</div>
-                                <div className="font-label-md text-label-md opacity-70">Lower Latency</div>
+                                <div className="font-label-md text-label-md opacity-70 text-xs">Lower Latency</div>
                             </div>
                             <div>
                                 <div className="text-display-lg-mobile font-display-lg text-secondary-fixed">$2.4B</div>
-                                <div className="font-label-md text-label-md opacity-70">Assets Managed</div>
+                                <div className="font-label-md text-label-md opacity-70 text-xs">Assets Managed</div>
                             </div>
                         </div>
                         <Link to="/contact">
-                            <button className="bg-white text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-colors shadow-lg cursor-pointer">
+                            <button className="bg-white text-primary px-6 py-3 md:px-8 md:py-4 rounded-lg font-label-md text-label-md hover:bg-surface-variant transition-all hover:-translate-y-px shadow-lg cursor-pointer">
                                 View Full Case Study
                             </button>
                         </Link>
@@ -131,9 +135,11 @@ const CaseStudies = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Case Study Grid (Masonry-like Bento) */}
-            <section className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto py-10 md:py-10 md:py-16 border-t border-outline-variant/20 animate-prepare-grid">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-4">
+            <section className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto py-16 md:py-24 bg-[#fcfcfd] border-b border-black/2 animate-prepare-grid bg-grid-pattern relative">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 relative z-10">
                     <div>
                         <h2 className="font-headline-lg text-headline-lg text-primary">Industry Diversification</h2>
                         <p className="font-body-md text-body-md text-on-surface-variant">
@@ -148,10 +154,10 @@ const CaseStudies = () => {
                                 <button
                                     key={filter}
                                     onClick={() => setSelectedFilter(filter)}
-                                    className={`px-4 py-2 rounded-full border font-label-md text-label-md transition-all ${
+                                    className={`px-4 py-2 rounded-full border font-label-md text-label-md transition-all cursor-pointer ${
                                         isActive
-                                            ? "border-primary bg-primary text-on-primary"
-                                            : "border-outline-variant text-on-surface-variant hover:bg-surface-container"
+                                            ? "border-primary bg-primary text-on-primary shadow-sm"
+                                            : "border-outline-variant text-on-surface-variant hover:bg-surface-container bg-white/70 backdrop-blur-sm"
                                     }`}
                                 >
                                     {filter === "All" ? "All Industries" : filter}
@@ -161,16 +167,16 @@ const CaseStudies = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-gutter">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-gutter relative z-10">
                     {filteredCaseStudies.map((card) => (
                         <div
                             key={card.id}
-                            className={`${card.gridClass} glass-card rounded-xl overflow-hidden flex ${card.layoutClass} group`}
+                            className={`${card.gridClass} glass-card rounded-xl overflow-hidden flex ${card.layoutClass} group border border-black/4 premium-card-hover`}
                         >
                             {/* Card Image Container */}
                             <div className={`${card.gridClass.includes("col-span-2") ? "md:w-1/2" : "w-full"} ${card.id === "medisync" ? "h-64 md:h-auto" : "h-48 md:h-auto"} overflow-hidden`}>
                                 <div
-                                    className="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                                    className="w-full h-full bg-cover bg-center"
                                     style={{ backgroundImage: `url('${card.imageSrc}')` }}
                                     title={card.imageAlt}
                                     loading="lazy"
@@ -178,12 +184,12 @@ const CaseStudies = () => {
                             </div>
 
                             {/* Card Content Container */}
-                            <div className={`p-6 ${card.gridClass.includes("col-span-2") ? "md:w-1/2" : "w-full"} flex flex-col justify-between`}>
+                            <div className={`p-6 ${card.gridClass.includes("col-span-2") ? "md:w-1/2" : "w-full"} flex flex-col justify-between bg-white/10`}>
                                 <div>
                                     <span className="text-secondary font-label-md text-xs sm:text-label-md mb-2 block">
                                         {card.category}
                                     </span>
-                                    <h3 className="font-headline-md text-lg md:text-lg sm:text-headline-md text-primary mb-3">
+                                    <h3 className="font-headline-md text-lg md:text-lg sm:text-headline-md text-primary mb-3 group-hover:text-secondary transition-colors">
                                         {card.title}
                                     </h3>
                                     <p className="font-body-sm text-xs sm:text-body-sm text-on-surface-variant mb-6 leading-relaxed">
@@ -202,14 +208,14 @@ const CaseStudies = () => {
                                                 {card.resultValue}
                                             </span>
                                         </div>
-                                        <span className="material-symbols-outlined text-primary group-hover:translate-x-2 transition-transform duration-300">
+                                        <span className="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform duration-300">
                                             arrow_forward
                                         </span>
                                     </div>
                                 )}
 
                                 {card.isStatBox && (
-                                    <div className="bg-surface-container-low p-4 rounded-lg">
+                                    <div className="bg-surface-container-low/70 border border-outline-variant/20 p-4 rounded-lg">
                                         <span className="font-label-md text-label-md text-xs sm:text-label-md text-on-surface-variant block">
                                             {card.resultLabel}
                                         </span>
@@ -224,7 +230,7 @@ const CaseStudies = () => {
                                         <div className="flex-1 h-2 bg-outline-variant/30 rounded-full overflow-hidden">
                                             <div className="w-full h-full bg-primary rounded-full"></div>
                                         </div>
-                                        <span className="font-label-md text-label-md text-primary">
+                                        <span className="font-label-md text-label-md text-primary text-xs">
                                             {card.progressLabel}
                                         </span>
                                     </div>
@@ -233,7 +239,7 @@ const CaseStudies = () => {
                                 {card.isTertiaryBox && (
                                     <div className="flex gap-4">
                                         <div className="p-4 bg-tertiary-fixed rounded-lg flex-1">
-                                            <span className="font-label-md text-label-md text-on-tertiary-fixed-variant block">
+                                            <span className="font-label-md text-label-md text-on-tertiary-fixed-variant block text-xs">
                                                 {card.tertiaryLabel}
                                             </span>
                                             <span className="font-headline-md text-lg md:text-headline-md text-on-tertiary-fixed font-bold">
@@ -243,7 +249,7 @@ const CaseStudies = () => {
                                     </div>
                                 )}
 
-                                <div className="mt-4 pt-4 border-t border-outline-variant/30 flex gap-4 text-xs font-label-md">
+                                <div className="mt-4 pt-4 border-t border-outline-variant/30 flex gap-4 text-[11px] font-label-md">
                                     <Link to={card.id === "medisync" ? "/solutions#artificial-intelligence" : card.id === "nextgen" ? "/solutions#software-development" : card.id === "vanguard" ? "/solutions#cybersecurity" : "/solutions#cloud-engineering"} className="text-secondary hover:text-primary transition-colors font-bold">
                                         Related Solution
                                     </Link>
@@ -258,44 +264,50 @@ const CaseStudies = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Global Impact Map */}
-            <section className="py-10 md:py-10 md:py-16 bg-primary-container text-white overflow-hidden border-t border-outline-variant/20 animate-prepare-map">
-                <div className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto">
+            <section className="py-16 md:py-24 bg-linear-to-br from-primary via-[#001733] to-[#1a0033] text-white overflow-hidden border-t border-outline-variant/20 animate-prepare-map relative">
+                {/* Decorative glows */}
+                <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-fixed/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+                
+                <div className="px-4 sm:px-6 md:px-10 max-w-container-max mx-auto relative z-10">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
                         <div className="relative">
                             <h2 className="font-headline-lg text-headline-lg mb-6">Our global footprint is expanding.</h2>
-                            <p className="font-body-lg text-body-lg text-on-primary-container mb-8 md:mb-12">
+                            <p className="font-body-lg text-body-lg text-on-primary-container/80 mb-8 md:mb-12">
                                 Nexora Labs operates across 4 continents, delivering locally optimized technology with global-scale reliability.
                             </p>
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
-                                    <div className="bg-secondary-container p-2 rounded-lg text-on-secondary-container">
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-lg text-secondary-fixed">
                                         <span className="material-symbols-outlined">public</span>
                                     </div>
                                     <div>
-                                        <h4 className="font-headline-md text-lg md:text-headline-md">24+ Countries</h4>
-                                        <p className="font-body-sm text-xs sm:text-body-sm opacity-70">
+                                        <h4 className="font-headline-md text-lg md:text-headline-md text-white">24+ Countries</h4>
+                                        <p className="font-body-sm text-xs sm:text-body-sm text-white/70">
                                             Active deployments in North America, Europe, Asia, and Oceania.
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="bg-secondary-container p-2 rounded-lg text-on-secondary-container">
+                                    <div className="bg-white/5 border border-white/10 p-2.5 rounded-lg text-secondary-fixed">
                                         <span className="material-symbols-outlined">partner_exchange</span>
                                     </div>
                                     <div>
-                                        <h4 className="font-headline-md text-lg md:text-headline-md">Fortune 500 Network</h4>
-                                        <p className="font-body-sm text-xs sm:text-body-sm opacity-70">
+                                        <h4 className="font-headline-md text-lg md:text-headline-md text-white">Fortune 500 Network</h4>
+                                        <p className="font-body-sm text-xs sm:text-body-sm text-white/70">
                                             Over 60% of our clients are global enterprise market leaders.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="relative h-[400px] md:h-[500px]">
+                        <div className="relative h-100 md:h-125">
                             {/* Stylized Map Points Visualization */}
                             <div className="absolute inset-0 opacity-20 flex items-center justify-center">
-                                <span className="material-symbols-outlined text-[300px]" style={{ fontVariationSettings: "'wght' 100" }}>
+                                <span className="material-symbols-outlined text-[300px] text-white" style={{ fontVariationSettings: "'wght' 100" }}>
                                     map
                                 </span>
                             </div>

@@ -126,17 +126,15 @@ const Solutions = () => {
     });
 
     return (
-        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20 bg-background">
             
 
             {/* Solutions Header */}
             <section
-                className="relative py-10 md:py-10 md:py-16 animate-prepare-header"
-                style={{
-                    backgroundImage: "radial-gradient(#d3e4fe 0.5px, transparent 0.5px)",
-                    backgroundSize: "24px 24px"
-                }}
+                className="relative py-12 md:py-20 animate-prepare-header bg-dot-pattern"
             >
+                {/* Soft radial glow behind header */}
+                <div className="absolute inset-0 radial-glow-hero -z-10 pointer-events-none opacity-80"></div>
                 <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10">
                     <div className="max-w-3xl">
                         <span className="font-label-md text-label-md text-secondary uppercase tracking-widest mb-4 block">
@@ -152,8 +150,10 @@ const Solutions = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Vertical Scrolling Service Blocks */}
-            <section className="space-y-16 py-10 md:py-16">
+            <section className="space-y-20 py-16 md:py-24 bg-background">
                 {serviceBlocks.map((block, index) => {
                     const isEven = index % 2 === 1;
                     return (
@@ -191,24 +191,24 @@ const Solutions = () => {
                                     ))}
                                 </ul>
                                 <Link
-                                    className="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-bold hover:gap-4 transition-all"
+                                    className="inline-flex items-center gap-2 font-label-md text-label-md text-primary font-bold group"
                                     to={block.linkHref}
                                 >
                                     {block.linkText}{" "}
-                                    <span className="material-symbols-outlined text-[18px]">
+                                    <span className="material-symbols-outlined text-[18px] transition-transform duration-300 group-hover:translate-x-1">
                                         arrow_forward
                                     </span>
                                 </Link>
                             </div>
                             <div className={`visual-wrapper group ${isEven ? "md:order-1" : "md:order-2"}`}>
-                                <div className="rounded-xl overflow-hidden shadow-xl border border-outline-variant/30 aspect-[4/3] bg-surface-container relative">
+                                <div className="premium-image-wrapper premium-card-hover aspect-4/3 bg-surface-container relative">
                                     <img
-                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 premium-img-hover" loading="lazy" decoding="async"
+                                        className="w-full h-full object-cover" loading="lazy" decoding="async"
                                         alt={block.imageAlt}
                                         src={block.imageSrc}
                                     />
                                     {block.hasOverlay && (
-                                        <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+                                        <div className="absolute inset-0 bg-linear-to-tr from-primary/10 to-transparent"></div>
                                     )}
                                 </div>
                             </div>
@@ -217,10 +217,12 @@ const Solutions = () => {
                 })}
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Capability Matrix */}
-            <section className="py-10 md:py-10 md:py-16 bg-surface-container-low border-t border-outline-variant/20 animate-prepare-matrix">
-                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10">
-                    <div className="text-center mb-10 md:mb-16">
+            <section className="py-16 md:py-24 bg-[#fcfcfd] border-b border-black/2 animate-prepare-matrix relative overflow-hidden bg-grid-pattern">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 relative z-10">
+                    <div className="text-center mb-12 md:mb-16">
                         <h2 className="font-headline-lg text-headline-lg text-primary mb-4">
                             Technology Stack Matrix
                         </h2>
@@ -228,11 +230,11 @@ const Solutions = () => {
                             Our toolkit is selected for performance, security, and long-term maintainability.
                         </p>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 md:gap-4 md:gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                         {techMatrix.map((col, idx) => (
                             <div
                                 key={idx}
-                                className="glass-card p-8 rounded-xl shadow-sm"
+                                className="glass-card p-8 rounded-xl border border-black/4"
                             >
                                 <h3 className="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
                                     <span className="material-symbols-outlined text-secondary">
@@ -261,25 +263,28 @@ const Solutions = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Solutions CTA */}
-            <section className="py-10 md:py-10 md:py-16 bg-primary relative overflow-hidden animate-prepare-cta">
+            <section className="py-16 md:py-24 bg-linear-to-br from-primary via-[#001733] to-[#1a0033] relative overflow-hidden animate-prepare-cta">
                 {/* Animated atmospheric circle */}
-                <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/20 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/15 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-fixed/5 blur-[120px] rounded-full -translate-x-1/2 translate-y-1/2"></div>
                 <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 relative z-10 text-center">
                     <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-white mb-8">
                         Ready for a Strategic Shift?
                     </h2>
-                    <p className="font-body-lg text-body-lg text-on-primary-container max-w-2xl mx-auto mb-10 md:mb-12">
+                    <p className="font-body-lg text-body-lg text-on-primary-container/85 max-w-2xl mx-auto mb-10 md:mb-12">
                         Schedule a consultation with our senior engineering team to discuss your specific technical challenges and business objectives.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link to="/contact">
-                            <button className="px-6 py-3 md:px-8 md:py-4 bg-white text-primary font-label-md text-label-md rounded-lg hover:bg-surface-variant transition-colors shadow-lg active:scale-95 duration-200 w-full sm:w-auto">
+                            <button className="px-6 py-3 md:px-8 md:py-4 bg-white text-primary font-label-md text-label-md rounded-lg hover:bg-surface-variant transition-all hover:-translate-y-px shadow-lg active:scale-95 duration-200 w-full sm:w-auto cursor-pointer">
                                 Request a technical briefing
                             </button>
                         </Link>
                         <Link to="/case-studies">
-                            <button className="px-6 py-3 md:px-8 md:py-4 border border-white/30 text-white font-label-md text-label-md rounded-lg hover:bg-white/10 transition-colors active:scale-95 duration-200 w-full sm:w-auto">
+                            <button className="px-6 py-3 md:px-8 md:py-4 border border-white/20 text-white font-label-md text-label-md rounded-lg hover:bg-white/10 transition-all hover:-translate-y-px active:scale-95 duration-200 w-full sm:w-auto cursor-pointer">
                                 View our portfolio
                             </button>
                         </Link>

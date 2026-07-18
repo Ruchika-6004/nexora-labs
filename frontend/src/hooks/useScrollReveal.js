@@ -16,7 +16,6 @@ export function useScrollReveal({
     initialClasses = ["transition-all", "duration-600", "opacity-0", "translate-y-5", "ease-out"],
     revealClasses = ["opacity-100", "translate-y-0"],
     removeClasses = ["opacity-0", "translate-y-5"],
-    interactiveSelector = "button, a",
     threshold = 0.1
 } = {}) {
     useEffect(() => {
@@ -37,30 +36,10 @@ export function useScrollReveal({
             observer.observe(el);
         });
 
-        // Interactive active state scaling handlers
-        const handleMouseDown = (e) => {
-            e.currentTarget.style.transform = "scale(0.98)";
-        };
-        const handleMouseUp = (e) => {
-            e.currentTarget.style.transform = "scale(1)";
-        };
-
-        const interactiveEls = document.querySelectorAll(interactiveSelector);
-        interactiveEls.forEach((el) => {
-            el.addEventListener("mousedown", handleMouseDown);
-            el.addEventListener("mouseup", handleMouseUp);
-            el.addEventListener("mouseleave", handleMouseUp);
-        });
-
         return () => {
             targets.forEach((el) => {
                 observer.unobserve(el);
             });
-            interactiveEls.forEach((el) => {
-                el.removeEventListener("mousedown", handleMouseDown);
-                el.removeEventListener("mouseup", handleMouseUp);
-                el.removeEventListener("mouseleave", handleMouseUp);
-            });
         };
-    }, [revealSelector, initialClasses, revealClasses, removeClasses, interactiveSelector, threshold]);
+    }, [revealSelector, initialClasses.join(','), revealClasses.join(','), removeClasses.join(','), threshold]);
 }

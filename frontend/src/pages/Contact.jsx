@@ -111,11 +111,13 @@ const Contact = () => {
     };
 
     return (
-        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20">
+        <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20 bg-background">
             
 
             {/* Contact Header */}
-            <header className="py-10 md:py-16 bg-surface-container-lowest overflow-hidden relative animate-prepare-header">
+            <header className="py-12 md:py-20 bg-[#fcfcfd] border-b border-black/2 overflow-hidden relative animate-prepare-header bg-dot-pattern">
+                {/* Soft radial glow behind header */}
+                <div className="absolute inset-0 radial-glow-hero -z-10 pointer-events-none opacity-80"></div>
                 <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 relative z-10 py-6">
                     <div className="max-w-3xl">
                         <h1 className="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-display-lg text-primary mb-6">Engage with Nexora</h1>
@@ -124,17 +126,16 @@ const Contact = () => {
                         </p>
                     </div>
                 </div>
-                <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-                    <div className="w-full h-full bg-gradient-to-bl from-secondary to-transparent"></div>
-                </div>
             </header>
 
+            <div className="gradient-divider" />
+
             {/* Split Layout: Form & Locations */}
-            <section className="py-10 md:py-10 md:py-16 border-t border-outline-variant/20 animate-prepare-split">
+            <section className="py-16 md:py-24 bg-background animate-prepare-split">
                 <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-gutter">
                     {/* Left: Premium Contact Form */}
                     <div className="lg:col-span-7">
-                        <div className="glass-card rounded-xl p-6 sm:p-8 lg:p-12">
+                        <div className="glass-card rounded-xl p-6 sm:p-8 lg:p-12 border border-black/4">
                             <h2 className="font-headline-lg text-xl sm:text-2xl lg:text-xl sm:text-headline-lg text-primary mb-8">Send a Message</h2>
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -226,15 +227,15 @@ const Contact = () => {
                                         onChange={(e) => setFormData({ ...formData, agreePrivacy: e.target.checked })}
                                         required
                                     />
-                                    <label className="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" htmlFor="privacy">
+                                    <label className="font-body-sm text-body-sm text-on-surface-variant cursor-pointer select-none" htmlFor="privacy">
                                         I agree to the privacy policy and consent to receiving communications.
                                     </label>
                                 </div>
                                 <button
-                                    className={`w-full py-4 rounded-lg font-label-md text-label-md hover:shadow-md transition-all active:scale-[0.98] shadow-sm text-on-primary ${
+                                    className={`w-full py-4 rounded-lg font-label-md text-label-md hover:shadow-md transition-all active:scale-[0.98] shadow-sm text-on-primary cursor-pointer ${
                                         submitStatus === "success"
                                             ? "bg-secondary"
-                                            : "bg-primary hover:bg-primary-container"
+                                            : "bg-primary hover:bg-[#002e63]"
                                     }`}
                                     type="submit"
                                     disabled={submitStatus === "sending"}
@@ -260,11 +261,11 @@ const Contact = () => {
                             {locations.map((loc, idx) => (
                                 <div
                                     key={idx}
-                                    className="p-6 rounded-xl border border-outline-variant bg-surface-container-lowest hover:shadow-md hover:border-primary/30 transition-all group cursor-pointer"
+                                    className="p-6 rounded-xl border border-outline-variant bg-white hover:shadow-md hover:border-primary/30 transition-all duration-300 group cursor-pointer"
                                 >
                                     <div className="flex justify-between items-start">
                                         <div>
-                                            <h3 className="font-headline-md text-lg sm:text-lg md:text-headline-md text-primary mb-1">{loc.name}</h3>
+                                            <h3 className="font-headline-md text-lg sm:text-lg md:text-headline-md text-primary mb-1 group-hover:text-secondary transition-colors">{loc.name}</h3>
                                             <p className="font-body-sm text-xs sm:text-body-sm text-on-surface-variant leading-relaxed whitespace-pre-line">
                                                 {loc.address}
                                             </p>
@@ -277,7 +278,7 @@ const Contact = () => {
                             ))}
                         </div>
                         {/* Map Placeholder */}
-                        <div className="rounded-xl overflow-hidden h-48 border border-outline-variant relative grayscale hover:grayscale-0 transition-all duration-500">
+                        <div className="premium-image-wrapper h-48 relative grayscale hover:grayscale-0 transition-all duration-500">
                             <img
                                 className="w-full h-full object-cover"
                                 alt="Modern grayscale enterprise map"
@@ -293,10 +294,12 @@ const Contact = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Department Directory */}
-            <section className="py-10 md:py-10 md:py-16 bg-surface-container border-t border-outline-variant/20 animate-prepare-directory">
-                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10">
-                    <div className="text-center mb-10 md:mb-12">
+            <section className="py-16 md:py-24 bg-[#fcfcfd] border-b border-black/2 animate-prepare-directory bg-grid-pattern relative overflow-hidden">
+                <div className="max-w-container-max mx-auto px-4 sm:px-6 md:px-10 relative z-10">
+                    <div className="text-center mb-12 md:mb-16">
                         <h2 className="font-headline-lg text-xl sm:text-headline-lg text-primary">Department Directory</h2>
                         <p className="font-body-md text-body-sm sm:text-body-md text-on-surface-variant mt-2">
                             Reach out directly to the experts who can assist you best.
@@ -306,7 +309,7 @@ const Contact = () => {
                         {departments.map((dept, idx) => (
                             <div
                                 key={idx}
-                                className="glass-card p-8 rounded-xl text-center"
+                                className="glass-card p-8 rounded-xl text-center border border-black/4"
                             >
                                 <div className={`w-12 h-12 md:w-14 md:h-14 shrink-0 ${dept.bg} ${dept.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
                                     <span className="material-symbols-outlined text-lg md:text-headline-md">{dept.icon}</span>
@@ -325,22 +328,24 @@ const Contact = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* FAQ Snippet (Accordion) */}
-            <section className="py-10 md:py-10 md:py-16 max-w-4xl mx-auto px-4 sm:px-6 md:px-10 border-t border-outline-variant/20 animate-prepare-faq">
-                <h2 className="font-headline-lg text-xl sm:text-headline-lg text-primary mb-10 md:mb-12 text-center">Common Inquiries</h2>
+            <section className="py-16 md:py-24 max-w-4xl mx-auto px-4 sm:px-6 md:px-10 animate-prepare-faq bg-background">
+                <h2 className="font-headline-lg text-xl sm:text-headline-lg text-primary mb-12 text-center">Common Inquiries</h2>
                 <div className="space-y-4">
                     {faqs.map((faq, idx) => (
                         <details
                             key={idx}
-                            className="group border border-outline-variant/50 rounded-xl bg-surface-container-lowest overflow-hidden transition-all"
+                            className="group border border-outline-variant/50 rounded-xl bg-white overflow-hidden transition-all duration-300"
                         >
-                            <summary className="flex justify-between items-center p-6 cursor-pointer font-headline-md text-lg md:text-headline-md text-on-surface hover:bg-surface-variant/10 transition-colors list-none">
+                            <summary className="flex justify-between items-center p-6 cursor-pointer font-headline-md text-lg md:text-headline-md text-on-surface hover:bg-surface-variant/5 transition-colors list-none select-none">
                                 <span className="font-medium">{faq.q}</span>
                                 <span className="material-symbols-outlined group-open:rotate-180 transition-transform text-primary">
                                     expand_more
                                 </span>
                             </summary>
-                            <div className="px-6 pb-6 font-body-md text-body-sm sm:text-body-md text-on-surface-variant border-t border-outline-variant/20 pt-4 leading-relaxed">
+                            <div className="px-6 pb-6 font-body-md text-body-sm sm:text-body-md text-on-surface-variant border-t border-outline-variant/20 pt-4 leading-relaxed bg-[#fcfcfd]/50">
                                 {faq.a}
                             </div>
                         </details>
@@ -348,20 +353,22 @@ const Contact = () => {
                 </div>
             </section>
 
+            <div className="gradient-divider" />
+
             {/* Exploration Section */}
-            <section className="py-10 md:py-16 text-center max-w-container-max mx-auto px-4 sm:px-6 md:px-10 border-t border-outline-variant/20 animate-prepare-exploration">
+            <section className="py-16 md:py-24 text-center max-w-container-max mx-auto px-4 sm:px-6 md:px-10 animate-prepare-exploration bg-[#fcfcfd] bg-dot-pattern">
                 <h3 className="font-headline-lg text-primary mb-6">Continue Exploring Nexora</h3>
                 <p className="font-body-md text-on-surface-variant mb-8 max-w-lg mx-auto">
                     Discover how we design, validate, and scale high-fidelity enterprise solutions across sectors.
                 </p>
                 <div className="flex flex-wrap justify-center gap-6">
-                    <Link to="/solutions" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-200">
+                    <Link to="/solutions" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-300 hover:-translate-y-px bg-white cursor-pointer shadow-sm">
                         Explore Solutions
                     </Link>
-                    <Link to="/innovation" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-200">
+                    <Link to="/innovation" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-300 hover:-translate-y-px bg-white cursor-pointer shadow-sm">
                         Our Innovation
                     </Link>
-                    <Link to="/case-studies" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-200">
+                    <Link to="/case-studies" className="px-6 py-3 border border-outline-variant text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-all duration-300 hover:-translate-y-px bg-white cursor-pointer shadow-sm">
                         Case Studies
                     </Link>
                 </div>
