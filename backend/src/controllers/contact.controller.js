@@ -1,15 +1,9 @@
 import Contact from "../models/contact.model.js";
 import asyncHandler from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiHandler.js";
 
 export const submitContactForm = asyncHandler(async (req, res) => {
     const { name, email, company, subject, message } = req.body;
-
-    if (!name || !email || !subject || !message) {
-        return res.status(400).json({
-            success: false,
-            message: "All required fields are mandatory.",
-        });
-    }
 
     const contact = await Contact.create({
         name,
@@ -19,9 +13,11 @@ export const submitContactForm = asyncHandler(async (req, res) => {
         message,
     });
 
-    res.status(201).json({
-        success: true,
-        message: "Contact request submitted successfully.",
-        data: contact,
-    });
+    return res.status(201).json(
+        new ApiResponse(
+            201,
+            contact,
+            "Contact request submitted successfully."
+        )
+    );
 });
