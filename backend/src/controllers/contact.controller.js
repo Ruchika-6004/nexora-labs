@@ -18,10 +18,9 @@ export const submitContactForm = asyncHandler(async (req, res) => {
         subject,
         message,
     });
-
     // Email to Admin
-    await sendEmail({
-        to: process.env.ADMIN_EMAIL,
+    const adminResponse = await sendEmail({
+        to: process.env.EMAIL_USER,
         subject: `New Contact Form - ${subject}`,
         html: adminEmailTemplate({
             name,
@@ -32,12 +31,16 @@ export const submitContactForm = asyncHandler(async (req, res) => {
         }),
     });
 
+    console.log("Admin Email Response:", adminResponse);
+
     // Auto Reply to User
-    await sendEmail({
+    const userResponse = await sendEmail({
         to: email,
         subject: "We've received your message",
         html: autoReplyTemplate(name),
     });
+
+    console.log("User Email Response:", userResponse);
 
     return res.status(201).json(
         new ApiResponse(

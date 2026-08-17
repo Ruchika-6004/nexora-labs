@@ -1,12 +1,23 @@
-import { Resend } from "resend";
+import dotenv from "dotenv";
+dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
 
 export const sendEmail = async ({ to, subject, html }) => {
-    return await resend.emails.send({
-        from: process.env.ADMIN_EMAIL,
+    const info = await transporter.sendMail({
+        from: `"Nexora Labs" <${process.env.EMAIL_USER}>`,
         to,
         subject,
         html,
     });
+
+    return info;
 };

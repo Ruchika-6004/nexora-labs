@@ -3,7 +3,7 @@ import { m } from "framer-motion";
 import { pageVariants } from "../utils/motion";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 import { Link } from "react-router-dom";
-
+import { submitContact } from "../services/contact.service";
 const locations = [
     {
         name: "New York",
@@ -85,25 +85,46 @@ const Contact = () => {
         setFocusedField("");
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         setSubmitStatus("sending");
 
-        setTimeout(() => {
+        try {
+            const payload = {
+                name: `${formData.firstName} ${formData.lastName}`,
+                email: formData.email,
+                company: formData.industry,
+                subject: "Website Contact",
+                message: formData.message,
+            };
+
+            await submitContact(payload);
+
             setSubmitStatus("success");
+
             setFormData({
                 firstName: "",
                 lastName: "",
                 email: "",
                 industry: "Financial Services",
                 message: "",
-                agreePrivacy: false
+                agreePrivacy: false,
             });
 
             setTimeout(() => {
                 setSubmitStatus("idle");
             }, 3000);
-        }, 1000);
+        } catch (error) {
+            console.error(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Something went wrong. Please try again."
+            );
+
+            setSubmitStatus("idle");
+        }
     };
 
     const getLabelColor = (fieldId) => {
@@ -112,7 +133,7 @@ const Contact = () => {
 
     return (
         <m.main initial="initial" animate="animate" variants={pageVariants} className="pt-20 bg-background">
-            
+
 
             {/* Contact Header */}
             <header className="py-12 md:py-20 bg-[#fcfcfd] border-b border-black/2 overflow-hidden relative animate-prepare-header bg-dot-pattern">
@@ -232,11 +253,10 @@ const Contact = () => {
                                     </label>
                                 </div>
                                 <button
-                                    className={`w-full py-4 rounded-lg font-label-md text-label-md hover:shadow-md transition-all active:scale-[0.98] shadow-sm text-on-primary cursor-pointer ${
-                                        submitStatus === "success"
-                                            ? "bg-secondary"
-                                            : "bg-primary hover:bg-[#002e63]"
-                                    }`}
+                                    className={`w-full py-4 rounded-lg font-label-md text-label-md hover:shadow-md transition-all active:scale-[0.98] shadow-sm text-on-primary cursor-pointer ${submitStatus === "success"
+                                        ? "bg-secondary"
+                                        : "bg-primary hover:bg-[#002e63]"
+                                        }`}
                                     type="submit"
                                     disabled={submitStatus === "sending"}
                                 >
